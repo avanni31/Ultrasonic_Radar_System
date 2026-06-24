@@ -1,1 +1,104 @@
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultrasonic Radar System Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glow-bg"></div>
+    <div class="dashboard-container">
+        
+        <!-- Sidebar Controls -->
+        <aside class="control-panel">
+            <header>
+                <div class="status-indicator-dot" id="system-status-dot"></div>
+                <h1>RADAR TELEMETRY</h1>
+                <p class="subtitle">STM32 INTEGRATION SYSTEM</p>
+            </header>
+            <div class="panel-section">
+                <h3>CONNECTION PANEL</h3>
+                <div class="button-group">
+                    <button id="btn-connect" class="btn btn-primary">
+                        <span class="icon">🔌</span> Connect Radar
+                    </button>
+                    <button id="btn-simulate" class="btn btn-secondary">
+                        <span class="icon">⚙️</span> Run Simulation
+                    </button>
+                </div>
+                <div class="info-card">
+                    <div class="info-row">
+                        <span class="lbl">Port Status:</span>
+                        <span id="status-port" class="val status-closed">DISCONNECTED</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="lbl">Baud Rate:</span>
+                        <span class="val">9600 bps</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-section">
+                <h3>LIVE TELEMETRY</h3>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <span class="metric-label">ANGLE</span>
+                        <span id="telemetry-angle" class="metric-value">0°</span>
+                        <div class="angle-dial-container">
+                            <div class="angle-dial-hand" id="dial-hand"></div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <span class="metric-label">DISTANCE</span>
+                        <span id="telemetry-distance" class="metric-value">0 cm</span>
+                        <span id="telemetry-status" class="threat-badge clear">SECURE</span>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-section flex-grow">
+                <h3>THREAT DETECTIONS</h3>
+                <div id="detection-log" class="log-container">
+                    <div class="log-placeholder">No threat detections logged</div>
+                </div>
+            </div>
+            
+            <footer>
+                <p>STM32F303RET6 &middot; HC-SR04 &middot; MG90</p>
+            </footer>
+        </aside>
+        <!-- Main Sweep Display -->
+        <main class="radar-display">
+            <!-- Warning Banner -->
+            <div id="threat-alert-banner" class="alert-banner hidden">
+                <div class="alert-title">⚠️ WARNING: PROXIMITY ALERT ⚠️</div>
+                <div class="alert-desc">Obstacle detected inside 20cm secure perimeter. Buzzer active.</div>
+            </div>
+            <!-- Radar Canvas -->
+            <div class="canvas-wrapper">
+                <canvas id="radarCanvas"></canvas>
+            </div>
+            <!-- Bottom Stats -->
+            <div class="bottom-metrics">
+                <div class="card">
+                    <span class="card-label">PERIMETER SAFETY</span>
+                    <span class="card-value">20.0 cm</span>
+                </div>
+                <div class="card">
+                    <span class="card-label">RADAR SCAN RANGE</span>
+                    <span class="card-value">200.0 cm</span>
+                </div>
+                <div class="card">
+                    <span class="card-label">SWEEP INTERVAL</span>
+                    <span class="card-value">40 ms</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
